@@ -29,7 +29,7 @@ class FakeLocationConverter {
             var lat = 0.0
             var lon = 0.0
             var alt = 0.0
-            var hdop = 0.0
+            var hacc = 0.0
 
             var lastIndex = -1
             var toDoubleError = false
@@ -45,7 +45,7 @@ class FakeLocationConverter {
                     0 -> lat = d
                     1 -> lon = d
                     2 -> alt = d
-                    3 -> hdop = d
+                    3 -> hacc = d
                 }
             }
 
@@ -62,7 +62,7 @@ class FakeLocationConverter {
                 lat,
                 lon,
                 alt,
-                hdop
+                hacc
             )
         }
     }

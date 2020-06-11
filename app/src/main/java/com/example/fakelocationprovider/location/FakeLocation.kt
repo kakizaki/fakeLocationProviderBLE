@@ -4,7 +4,7 @@ data class FakeLocation(
         val lat: Double,
         val lon: Double,
         val alt: Double,
-        val hdop: Double
+        val hacc: Double
 )
 
 

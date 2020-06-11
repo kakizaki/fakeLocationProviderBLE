@@ -169,12 +169,12 @@ function onDoubleClickMap(l) {
     var lat = document.getElementById('latitude');
     var lng = document.getElementById('longitude');
     var alt = document.getElementById('altitude');
-    var hdop = document.getElementById('hdop');
+    var hacc = document.getElementById('hacc');
 
     lat.value = l.lat();
     lng.value = l.lng();
     
-    sendLocation(lat.value, lng.value, alt.value, hdop.value);
+    sendLocation(lat.value, lng.value, alt.value, hacc.value);
 }
 
 // 送信ボタンをクリックされたとき: フォームに入力されている位置情報を送信する
@@ -182,24 +182,24 @@ function onClickSendButton() {
     var lat = document.getElementById('latitude');
     var lng = document.getElementById('longitude');
     var alt = document.getElementById('altitude');
-    var hdop = document.getElementById('hdop');
+    var hacc = document.getElementById('hacc');
 
-    sendLocation(lat.value, lng.value, alt.value, hdop.value);
+    sendLocation(lat.value, lng.value, alt.value, hacc.value);
 }
 
 // 位置情報を送信する
-function sendLocation(lat, lng, alt, hdop) {
-    var l = { lat: Number(lat), lng: Number(lng), alt: Number(alt), hdop: Number(hdop) };
+function sendLocation(lat, lng, alt, hacc) {
+    var l = { lat: Number(lat), lng: Number(lng), alt: Number(alt), hacc: Number(hacc) };
 
     if (Number.isNaN(l.lat)) { alert("緯度を数値に変換できません"); return; }
     if (Number.isNaN(l.lng)) { alert("経度を数値に変換できません"); return; }
     if (Number.isNaN(l.alt)) { alert("高度を数値に変換できません"); return; }
-    if (Number.isNaN(l.hdop)) { alert("HDOPを数値に変換できません"); return; }
+    if (Number.isNaN(l.hacc)) { alert("水平精度を数値に変換できません"); return; }
     
     updateMarker(l.lat, l.lng);
 
     try {
-        var m = lat + "," + lng + "," + alt + "," + hdop;
+        var m = lat + "," + lng + "," + alt + "," + hacc;
         writeMessage(m);
     }
     catch (e) {
@@ -291,8 +291,8 @@ function updateMarker(lat, lng) {
         <label for="altitude">高度</label>
         <input type='text' id='altitude' placeholder='高度' value="0" />
         
-        <label for="hdop">HDOP</label>
-        <input type='text' id='hdop' placeholder='HDOP' value="0" />
+        <label for="hacc">水平精度</label>
+        <input type='text' id='hacc' placeholder='水平精度' value="0" />
 
         <button id='write' onclick='onClickSendButton();'>送信</button>
 

@@ -407,7 +407,7 @@ class LocationTimerTask(val c: Context) : TimerTask() {
                 l.latitude = it.lat
                 l.longitude = it.lon
                 l.altitude = it.alt
-                l.accuracy = it.hdop.toFloat()
+                l.accuracy = it.hacc.toFloat()
                 l.time = date.time  // Date.time は UTC時刻を返す
                 l.speed = 0f
                 l.elapsedRealtimeNanos = android.os.SystemClock.elapsedRealtimeNanos()
@@ -449,7 +449,9 @@ class LocationTimerTask(val c: Context) : TimerTask() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val l = it.result
-                    Log.d("bletest", "LocationServices.lastLocation $l")
+                    if (l != null) {
+                        Log.d("bletest", "LocationServices.lastLocation ${l.latitude},${l.longitude} alt=${l.altitude} acc=${l.accuracy}")
+                    }
                 }
                 else {
                     val e = it.exception
